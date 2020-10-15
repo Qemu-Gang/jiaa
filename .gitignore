@@ -5,3 +5,7 @@
 Cargo.lock
 flow-bench/target
 nostd-test/target
+
+.idea/*
+jiaa-build/*
+jiaa-src/cmake-build-*/*

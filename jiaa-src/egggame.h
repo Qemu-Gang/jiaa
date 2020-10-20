@@ -25,7 +25,7 @@ enum
 struct Entity
 {
     //name at around 0x470, read until nul byte.
-    char _pad[0x6B8];
+    char _pad[0x6D0];
     double posX;
     double posY; //vertical
     double posZ;
@@ -54,7 +54,7 @@ struct LocalPlayer
         double localPosX; //0x0000
         double localPosY; //0x0008
         double localPosZ; //0x0010
-        char pad_0018[96]; //0x0018
+        char pad_0018[88]; //0x0018
         double velocityX; //0x0078
         double velocityY; //0x0080
         double velocityZ; //0x0088

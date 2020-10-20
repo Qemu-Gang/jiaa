@@ -25,6 +25,7 @@ After all that is done, you can finally run jiaa as root
 ## Features 
 - ESP tracers
 - Flight [CTRL - toggle altitude lock, SPACE - ascend]
+- Nudge through terrain [Insert/Delete (X-axis), Home/end (Z-axis), PgUp/PgDown (Y-axis UP/DOWN)]
 
 ## Media
 https://streamable.com/7oa3ou

@@ -151,9 +151,16 @@ int main(int argc, char *argv[]) {
 
     bool writePlayer = false;
     bool shouldHover = false;
+    bool shouldSpeed = false;
     double yaw, pitch;
-    long long lastToggle = current_timestamp();
-
+    long long now = current_timestamp();
+    long long lastHover = now;
+    long long lastUp = now;
+    long long lastDown = now;
+    long long lastXForward = now;
+    long long lastXBack = now;
+    long long lastZForward = now;
+    long long lastZBack = now;
     printf("Starting main loop...\n");
     while( running )
     {
@@ -185,12 +192,61 @@ int main(int argc, char *argv[]) {
             writePlayer = true;
         }
 
-        if( pressedKeys[KEY_LEFTCTRL] && (current_timestamp() - lastToggle) > 250 )
+        if( pressedKeys[KEY_LEFTCTRL] && (current_timestamp() - lastHover) > 250 )
         {
-            printf("toggling hover\n");
             shouldHover = !shouldHover;
-            lastToggle = current_timestamp();
+            printf("toggling hover %s\n", shouldHover ? "ON" : "OFF");
+            lastHover = current_timestamp();
         }
+
+        if( pressedKeys[KEY_PAGEUP] && (current_timestamp() - lastUp) > 100 )
+        {
+            printf("nudging up\n");
+            localPlayer.localPosY += 50.0f;
+            lastUp = current_timestamp();
+            writePlayer = true;
+        }
+
+        if( pressedKeys[KEY_PAGEDOWN] && (current_timestamp() - lastDown) > 100 )
+        {
+            printf("nudging down\n");
+            localPlayer.localPosY -= 50.0f;
+            lastDown = current_timestamp();
+            writePlayer = true;
+        }
+
+        if( pressedKeys[KEY_HOME] && (current_timestamp() - lastZForward) > 100 )
+        {
+            printf("bumping Y+\n");
+            localPlayer.localPosZ += 50.0f;
+            lastZForward = current_timestamp();
+            writePlayer = true;
+        }
+
+        if( pressedKeys[KEY_END] && (current_timestamp() - lastZBack) > 100 )
+        {
+            printf("bumping Y-\n");
+            localPlayer.localPosZ -= 50.0f;
+            lastZBack = current_timestamp();
+            writePlayer = true;
+        }
+
+        if( pressedKeys[KEY_INSERT] && (current_timestamp() - lastXForward) > 100 )
+        {
+            printf("bumping X+\n");
+            localPlayer.localPosX += 50.0f;
+            lastXForward = current_timestamp();
+            writePlayer = true;
+        }
+
+        if( pressedKeys[KEY_DELETE] && (current_timestamp() - lastXBack) > 100 )
+        {
+            printf("bumping X+\n");
+            localPlayer.localPosX -= 50.0f;
+            lastXBack = current_timestamp();
+            writePlayer = true;
+        }
+
 
         if( shouldHover )
         {
